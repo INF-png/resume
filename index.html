@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简历</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="scroll-container">
+
+    <!-- 第 1 页：封面 / 个人简介 -->
+    <section class="page" id="page-1">
+      <div class="hero-split">
+        <!-- 左侧：背景轮换区 70% -->
+        <div class="hero-carousel">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-slide" style="background-image: url('assets/carousel-1.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('assets/carousel-2.jpg');"></div>
+            <div class="carousel-slide" style="background-image: url('assets/carousel-3.jpg');"></div>
+          </div>
+        </div>
+        <!-- 右侧：纯色文本区 30% -->
+        <div class="hero-info">
+          <h1 class="page-title">INFINITY</h1>
+          <p class="page-subtitle">法律从业者 · 深圳</p>
+          <div class="hero-lines" id="hero-lines">
+            <p class="hero-line">在法庭之上保护您的权益</p>
+            <p class="hero-line">在会议室商讨您的展望</p>
+            <p class="hero-line">抑或是用一杯咖啡的时间聆听您的需求</p>
+            <p class="hero-line">您的信任即是我的使命</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第 2 页：经历与技能 -->
+    <section class="page" id="page-2">
+      <div class="page-overlay">
+        <div class="split-layout">
+          <!-- 左栏：经历 -->
+          <div class="split-left">
+            <h2 class="section-heading">工作经历</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">2026.9</span>
+                  <h3 class="timeline-title">汕头大学 · 法学专业</h3>
+                  <p class="timeline-desc">进入汕头大学法学专业深造。</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">2026.8</span>
+                  <h3 class="timeline-title">卓建律师事务所 · 实习</h3>
+                  <p class="timeline-desc">进入卓建律师事务所实习。</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-date">2026.6</span>
+                  <h3 class="timeline-title">毕业于深圳某高中</h3>
+                  <p class="timeline-desc">在深圳完成高中学业，顺利毕业。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右栏：技能 -->
+          <div class="split-right">
+            <h2 class="section-heading">技能</h2>
+            <div class="skills-list">
+              <div class="skill-item">
+                <span class="skill-name">人文素养</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">创新能力</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">工作实践经验</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">业务能力</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">跨领域能力</span>
+                <div class="skill-bar"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第 3 页：项目展示与联系方式 -->
+    <section class="page" id="page-3">
+      <div class="page-overlay">
+        <h2 class="section-heading">更多信息</h2>
+        <div class="project-grid">
+          <a href="project1.html" class="card card-link">
+            <h3 class="card-title">个人简介</h3>
+            <p class="card-desc">想进一步了解INFINITY？</p>
+          </a>
+          <a href="project2.html" class="card card-link">
+            <h3 class="card-title">资料展示</h3>
+            <div class="card-tags">
+              <span class="tag">AI能力认证</span>
+              <span class="tag">商业能力</span>
+              <span class="tag">法律专业能力</span>
+            </div>
+          </a>
+          <a href="project3.html" class="card card-link">
+            <h3 class="card-title">简历生成</h3>
+            <p class="card-desc">获取可供直接下载打印的简历</p>
+          </a>
+        </div>
+        <div class="contact-section">
+          <h2 class="section-heading">联系方式</h2>
+          <p class="contact-info">
+            <a href="mailto:yourname@email.com">yourname@email.com</a>
+            <span class="contact-sep">/</span>
+            <a href="https://github.com/yourname" target="_blank">github.com/yourname</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

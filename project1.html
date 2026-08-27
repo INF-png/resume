@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简介 - 个人简历</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .project-page {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      padding: var(--page-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .project-page .back-link {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--color-link);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+    .project-page .back-link:hover {
+      opacity: 0.7;
+    }
+    .project-page .back-arrow {
+      margin-right: 6px;
+    }
+    .project-page .project-hero {
+      text-align: center;
+      margin-bottom: 96px;
+    }
+    .project-page .project-hero .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    .project-page .project-hero .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--card-border);
+    }
+    .project-page .project-hero h1 {
+      font-family: var(--font-heading);
+      font-size: var(--title-size);
+      font-weight: var(--title-weight);
+      letter-spacing: var(--title-spacing);
+      line-height: var(--title-line-height);
+      color: var(--color-heading);
+      margin: 0;
+    }
+    .project-page .project-body {
+      max-width: 960px;
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--color-sub);
+      text-align: center;
+    }
+    .project-page .project-body .intro-line {
+      margin-bottom: 18px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .project-page .project-body .intro-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-page .project-body .intro-line:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="project-page">
+    <a href="index.html" class="back-link">
+      <span class="back-arrow">←</span>返回简历
+    </a>
+    <div class="project-hero">
+      <div class="title-row">
+        <img class="avatar" src="assets/avatar.jpg" alt="头像">
+        <h1>个人简介</h1>
+      </div>
+    </div>
+    <div class="project-body">
+      <p class="intro-line">INFINITY，来自深圳的一位上进者，实践者，更是一位能够和您寻求合作与机遇的伙伴。</p>
+      <p class="intro-line">自2026年毕业于深圳某高中，这个时期的理科知识学习是我立志成为复合型领域沟通者的身份的契机。</p>
+      <p class="intro-line">结束了高中的学业后，我选择法学作为未来的学习方向，以法为根基，将枝叶伸展到多种领域成为我的追求。</p>
+      <p class="intro-line">无论是您在法律领域需要专业的建议，抑或是您希望找到一位志同道合的事业合作者，我都会尽我的努力以回应您的期望。</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lines = document.querySelectorAll('.intro-line');
+      if (lines.length > 0) {
+        setTimeout(function () {
+          lines.forEach(function (line, i) {
+            setTimeout(function () {
+              line.classList.add('visible');
+            }, i * 600);
+          });
+        }, 300);
+      }
+    })();
+  </script>
+</body>
+</html>

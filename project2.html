@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资料展示 - 个人简历</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .project-page {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      padding: var(--page-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .project-page .back-link {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--color-link);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: opacity 0.2s;
+      align-self: flex-start;
+    }
+    .project-page .back-link:hover {
+      opacity: 0.7;
+    }
+    .project-page .back-arrow {
+      margin-right: 6px;
+    }
+    .project-page .project-hero {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .project-page .project-hero h1 {
+      font-family: var(--font-heading);
+      font-size: var(--title-size);
+      font-weight: var(--title-weight);
+      letter-spacing: var(--title-spacing);
+      line-height: var(--title-line-height);
+      color: var(--color-heading);
+      margin: 0;
+    }
+
+    /* 三列错开布局 */
+    .showcase-row {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .showcase-col {
+      flex: 1;
+      min-width: 0;
+    }
+    .showcase-col:nth-child(1) {
+      margin-top: 0;
+    }
+    .showcase-col:nth-child(2) {
+      margin-top: 60px;
+    }
+    .showcase-col:nth-child(3) {
+      margin-top: 30px;
+    }
+
+    /* 证书重叠区域 - 堆叠态 */
+    .cert-stack {
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;
+      cursor: pointer;
+    }
+    .cert-stack .cert-item {
+      position: absolute;
+      border: 2px solid var(--card-border);
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(62, 39, 35, 0.1);
+      object-fit: contain;
+      transition: all 0.5s ease;
+    }
+    .cert-stack .cert-1 {
+      top: 0;
+      left: 0;
+      width: 85%;
+      height: auto;
+      z-index: 3;
+      transform: rotate(-2deg);
+    }
+    .cert-stack .cert-2 {
+      top: 24px;
+      left: 40px;
+      width: 85%;
+      height: auto;
+      z-index: 2;
+      transform: rotate(3deg);
+    }
+    .cert-stack .cert-3 {
+      top: 48px;
+      left: 20px;
+      width: 85%;
+      height: auto;
+      z-index: 1;
+      transform: rotate(-1deg);
+    }
+
+    /* 展开态 */
+    .cert-stack.expanded {
+      padding-bottom: 0;
+      cursor: pointer;
+    }
+    .cert-stack.expanded .cert-item {
+      position: static;
+      width: 100%;
+      height: auto;
+      transform: rotate(0deg);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .cert-stack.expanded .cert-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 点击提示 */
+    .cert-hint {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--color-sub);
+      opacity: 0.7;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .cert-stack.expanded .cert-hint {
+      position: static;
+      transform: none;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* 占位区域 */
+    .placeholder-region {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border: 1px dashed var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-sub);
+      font-size: var(--small-size);
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .showcase-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      .showcase-col:nth-child(1),
+      .showcase-col:nth-child(2),
+      .showcase-col:nth-child(3) {
+        margin-top: 0;
+        width: 100%;
+        max-width: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="project-page">
+    <a href="index.html" class="back-link">
+      <span class="back-arrow">←</span>返回简历
+    </a>
+    <div class="project-hero">
+      <h1>资料展示</h1>
+    </div>
+    <div class="showcase-row">
+      <!-- 第一列：AI证书 -->
+      <div class="showcase-col">
+        <div class="cert-stack" id="certStack">
+          <img class="cert-item cert-1" src="assets/人工智能训练师（初级）-杨远桐-20260731.jpg" alt="AI初级证书">
+          <img class="cert-item cert-2" src="assets/人工智能训练师（高级）-杨远桐-20260731.jpg" alt="AI高级证书">
+          <img class="cert-item cert-3" src="assets/ITCILO.png" alt="ITCILO证书">
+          <span class="cert-hint">点击展开查看</span>
+        </div>
+      </div>
+      <!-- 第二列：占位 -->
+      <div class="showcase-col">
+        <div class="placeholder-region">图片待添加</div>
+      </div>
+      <!-- 第三列：占位 -->
+      <div class="showcase-col">
+        <div class="placeholder-region">图片待添加</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var stack = document.getElementById('certStack');
+      var hint = stack.querySelector('.cert-hint');
+      stack.addEventListener('click', function () {
+        var expanded = stack.classList.toggle('expanded');
+        hint.textContent = expanded ? '点击收起' : '点击展开查看';
+      });
+    })();
+  </script>
+</body>
+</html>
