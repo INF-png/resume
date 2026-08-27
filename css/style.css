@@ -102,6 +102,28 @@ a:hover {
   scroll-behavior: smooth;
 }
 
+/* 自定义滚动条 */
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: var(--color-sub);
+  border-radius: 3px;
+  opacity: 0.5;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-heading);
+}
+
+/* Firefox */
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-sub) transparent;
+}
+
 /* ===== 页面 ===== */
 .page {
   height: 100vh;
