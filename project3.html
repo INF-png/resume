@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     .project-page {
-      min-height: 100vh;
       background-color: var(--color-bg);
       padding: var(--page-padding);
       display: flex;
@@ -21,7 +20,7 @@
       font-size: var(--body-size);
       color: var(--color-link);
       text-decoration: none;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       transition: opacity 0.2s;
       align-self: flex-start;
     }
@@ -33,7 +32,7 @@
     }
     .project-page .project-hero {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 28px;
     }
     .project-page .project-hero h1 {
       font-family: var(--font-heading);
@@ -42,7 +41,7 @@
       letter-spacing: var(--title-spacing);
       line-height: var(--title-line-height);
       color: var(--color-heading);
-      margin: 0 0 16px 0;
+      margin: 0 0 12px 0;
     }
 
     /* 下载按钮 */
@@ -60,7 +59,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: opacity 0.2s;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
     }
     .download-btn:hover {
       opacity: 0.85;
@@ -78,19 +77,20 @@
       box-shadow: 0 2px 16px rgba(62, 39, 35, 0.08);
       border-radius: 4px;
       overflow: hidden;
+      margin-bottom: 40px;
     }
     .pdf-preview embed {
       width: 100%;
-      height: 80vh;
-      min-height: 500px;
+      height: 100vh;
+      min-height: 600px;
       border: none;
       display: block;
     }
 
     @media (max-width: 768px) {
       .pdf-preview embed {
-        height: 60vh;
-        min-height: 400px;
+        height: 90vh;
+        min-height: 500px;
       }
     }
   </style>
