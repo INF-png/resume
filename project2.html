@@ -72,11 +72,13 @@
     .cert-stack {
       position: relative;
       width: 100%;
-      padding-bottom: 75%;
       cursor: pointer;
+      overflow: visible;
     }
     .cert-stack .cert-item {
-      position: absolute;
+      display: block;
+      width: 100%;
+      height: auto;
       border: 2px solid var(--card-border);
       background: #fff;
       box-shadow: 0 2px 12px rgba(62, 39, 35, 0.1);
@@ -84,42 +86,29 @@
       transition: all 0.5s ease;
     }
     .cert-stack .cert-1 {
-      top: 0;
-      left: 0;
-      width: 85%;
-      height: auto;
+      position: relative;
       z-index: 3;
       transform: rotate(-2deg);
     }
     .cert-stack .cert-2 {
-      top: 24px;
-      left: 40px;
-      width: 85%;
-      height: auto;
+      margin-top: -35%;
       z-index: 2;
       transform: rotate(3deg);
     }
     .cert-stack .cert-3 {
-      top: 48px;
-      left: 20px;
-      width: 85%;
-      height: auto;
+      margin-top: -35%;
       z-index: 1;
       transform: rotate(-1deg);
     }
 
     /* 展开态 */
     .cert-stack.expanded {
-      padding-bottom: 0;
       cursor: pointer;
     }
     .cert-stack.expanded .cert-item {
-      position: static;
-      width: 100%;
-      height: auto;
-      transform: rotate(0deg);
+      margin-top: 0;
       margin-bottom: 16px;
-      display: block;
+      transform: rotate(0deg);
     }
     .cert-stack.expanded .cert-item:last-child {
       margin-bottom: 0;
@@ -139,9 +128,12 @@
       transition: opacity 0.3s;
     }
     .cert-stack.expanded .cert-hint {
-      position: static;
+      position: relative;
+      left: auto;
+      bottom: auto;
       transform: none;
       margin-top: 8px;
+      display: block;
       text-align: center;
     }
 
