@@ -68,15 +68,17 @@
       margin-top: 30px;
     }
 
-    /* 证书重叠区域 - 堆叠态 */
+    /* 证书重叠区域 - 堆叠态：使用 CSS Grid 叠加 */
     .cert-stack {
-      position: relative;
+      display: grid;
+      grid-template-areas: "stack";
       width: 100%;
       cursor: pointer;
-      overflow: visible;
+    }
+    .cert-stack > * {
+      grid-area: stack;
     }
     .cert-stack .cert-item {
-      display: block;
       width: 100%;
       height: auto;
       border: 2px solid var(--card-border);
@@ -84,57 +86,45 @@
       box-shadow: 0 2px 12px rgba(62, 39, 35, 0.1);
       object-fit: contain;
       transition: all 0.5s ease;
+      will-change: transform;
     }
     .cert-stack .cert-1 {
-      position: relative;
       z-index: 3;
       transform: rotate(-2deg);
     }
     .cert-stack .cert-2 {
-      margin-top: -35%;
       z-index: 2;
-      transform: rotate(3deg);
+      transform: rotate(3deg) translateY(12%);
     }
     .cert-stack .cert-3 {
-      margin-top: -35%;
       z-index: 1;
-      transform: rotate(-1deg);
+      transform: rotate(-1deg) translateY(24%);
     }
 
     /* 展开态 */
     .cert-stack.expanded {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
       cursor: pointer;
     }
-    .cert-stack.expanded .cert-item {
-      margin-top: 0;
-      margin-bottom: 16px;
-      transform: rotate(0deg);
+    .cert-stack.expanded > * {
+      grid-area: auto;
     }
-    .cert-stack.expanded .cert-item:last-child {
-      margin-bottom: 0;
+    .cert-stack.expanded .cert-item {
+      transform: rotate(0deg) translateY(0);
     }
 
     /* 点击提示 */
     .cert-hint {
-      position: absolute;
-      bottom: -28px;
-      left: 50%;
-      transform: translateX(-50%);
+      display: block;
+      text-align: center;
+      margin-top: 12px;
       font-size: 12px;
       color: var(--color-sub);
       opacity: 0.7;
       white-space: nowrap;
-      pointer-events: none;
       transition: opacity 0.3s;
-    }
-    .cert-stack.expanded .cert-hint {
-      position: relative;
-      left: auto;
-      bottom: auto;
-      transform: none;
-      margin-top: 8px;
-      display: block;
-      text-align: center;
     }
 
     /* 占位区域 */
@@ -181,8 +171,8 @@
           <img class="cert-item cert-1" src="assets/人工智能训练师（初级）-杨远桐-20260731.jpg" alt="AI初级证书">
           <img class="cert-item cert-2" src="assets/人工智能训练师（高级）-杨远桐-20260731.jpg" alt="AI高级证书">
           <img class="cert-item cert-3" src="assets/ITCILO.png" alt="ITCILO证书">
-          <span class="cert-hint">点击展开查看</span>
         </div>
+        <span class="cert-hint" id="certHint">点击展开查看</span>
       </div>
       <!-- 第二列：占位 -->
       <div class="showcase-col">
@@ -198,7 +188,7 @@
   <script>
     (function () {
       var stack = document.getElementById('certStack');
-      var hint = stack.querySelector('.cert-hint');
+      var hint = document.getElementById('certHint');
       stack.addEventListener('click', function () {
         var expanded = stack.classList.toggle('expanded');
         hint.textContent = expanded ? '点击收起' : '点击展开查看';
