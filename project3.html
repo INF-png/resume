@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>项目三 - 个人简历</title>
+  <title>简历生成 - 个人简历</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -11,6 +11,9 @@
       min-height: 100vh;
       background-color: var(--color-bg);
       padding: var(--page-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .project-page .back-link {
       display: inline-block;
@@ -20,6 +23,7 @@
       text-decoration: none;
       margin-bottom: 40px;
       transition: opacity 0.2s;
+      align-self: flex-start;
     }
     .project-page .back-link:hover {
       opacity: 0.7;
@@ -28,7 +32,8 @@
       margin-right: 6px;
     }
     .project-page .project-hero {
-      margin-bottom: 48px;
+      text-align: center;
+      margin-bottom: 40px;
     }
     .project-page .project-hero h1 {
       font-family: var(--font-heading);
@@ -37,28 +42,56 @@
       letter-spacing: var(--title-spacing);
       line-height: var(--title-line-height);
       color: var(--color-heading);
-      margin-bottom: 12px;
+      margin: 0 0 16px 0;
     }
-    .project-page .project-hero .project-subtitle {
-      font-family: var(--font-heading);
-      font-size: var(--subtitle-size);
-      font-weight: var(--subtitle-weight);
-      letter-spacing: var(--subtitle-spacing);
-      color: var(--color-sub);
-    }
-    .project-page .project-body {
-      max-width: 720px;
+
+    /* 下载按钮 */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-family: var(--font-body);
       font-size: var(--body-size);
-      line-height: var(--body-line-height);
-      color: var(--color-text);
+      color: #fff;
+      background: var(--color-heading);
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-bottom: 36px;
     }
-    .project-page .placeholder-note {
-      color: var(--color-sub);
-      font-style: italic;
-      margin-top: 32px;
-      padding: 20px;
-      border: var(--text-border-width) var(--text-border-style) var(--text-border-color);
-      border-radius: var(--text-border-radius);
+    .download-btn:hover {
+      opacity: 0.85;
+    }
+    .download-icon {
+      font-size: 18px;
+    }
+
+    /* PDF 预览容器 */
+    .pdf-preview {
+      width: 100%;
+      max-width: 900px;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 2px 16px rgba(62, 39, 35, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .pdf-preview embed {
+      width: 100%;
+      height: 80vh;
+      min-height: 500px;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .pdf-preview embed {
+        height: 60vh;
+        min-height: 400px;
+      }
     }
   </style>
 </head>
@@ -68,11 +101,15 @@
       <span class="back-arrow">←</span>返回简历
     </a>
     <div class="project-hero">
-      <h1>项目三</h1>
-      <p class="project-subtitle">TypeScript · Next.js · PostgreSQL</p>
+      <h1>简历生成</h1>
     </div>
-    <div class="project-body">
-      <p class="placeholder-note">内容待添加 — 此处将展示项目的详细描述、背景、你的角色和成果。</p>
+
+    <a href="assets/resume.pdf" class="download-btn" download>
+      <span class="download-icon">↓</span> 下载简历 PDF
+    </a>
+
+    <div class="pdf-preview">
+      <embed src="assets/resume.pdf" type="application/pdf">
     </div>
   </div>
 </body>
