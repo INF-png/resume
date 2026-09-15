@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>个人简历</title>
+  <title>杨远桐 · 个人简介</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,33 +11,29 @@
 
   <div class="scroll-container">
 
-    <!-- 第 1 页：封面 / 个人简介 -->
-    <section class="page" id="page-1">
-      <div class="hero-split">
-        <!-- 左侧：背景轮换区 70% -->
-        <div class="hero-carousel">
-          <div class="carousel-track" id="carousel-track">
-            <div class="carousel-slide" style="background-image: url('assets/carousel-1.jpg');"></div>
-            <div class="carousel-slide" style="background-image: url('assets/carousel-2.jpg');"></div>
-            <div class="carousel-slide" style="background-image: url('assets/carousel-3.jpg');"></div>
-          </div>
-        </div>
-        <!-- 右侧：纯色文本区 30% -->
-        <div class="hero-info">
-          <h1 class="page-title">INFINITY</h1>
-          <p class="page-subtitle">法律从业者 · 深圳</p>
-          <div class="hero-lines" id="hero-lines">
-            <p class="hero-line">在法庭之上保护您的权益</p>
-            <p class="hero-line">在会议室商讨您的展望</p>
-            <p class="hero-line">抑或是用一杯咖啡的时间聆听您的需求</p>
-            <p class="hero-line">您的信任即是我的使命</p>
-          </div>
-        </div>
+    <!-- 第 1 页：封面标题 + 波浪粒子 -->
+    <section class="page page-1" id="page-1">
+      <canvas class="fx-canvas wave-canvas" id="wave-canvas"></canvas>
+      <div class="page-hero">
+        <h1 class="hero-title" id="hero-title">起潮涌，赴山海</h1>
+        <p class="hero-subtitle" id="hero-subtitle">杨远桐&nbsp;&nbsp;个人简介</p>
       </div>
     </section>
 
-    <!-- 第 2 页：经历与技能 -->
-    <section class="page" id="page-2">
+    <!-- 第 2 页：四行宣言 + 鼠标打散粒子 -->
+    <section class="page page-2" id="page-2">
+      <canvas class="fx-canvas" id="burst-canvas"></canvas>
+      <div class="page-motto">
+        <p class="motto-line" data-order="0">以法为舟</p>
+        <p class="motto-line" data-order="1">以理科的研究精神为桨</p>
+        <p class="motto-line" data-order="2">以文科的宏观思维为帆</p>
+        <p class="motto-line" data-order="3">驶向跨领域发展的远海......</p>
+      </div>
+    </section>
+
+    <!-- 第 3 页：复制原网站第 2 页（经历与技能） -->
+    <section class="page page-3" id="page-3">
+      <canvas class="fx-canvas wave-canvas" id="wave-canvas-3"></canvas>
       <div class="page-overlay">
         <div class="split-layout">
           <!-- 左栏：经历 -->
@@ -64,7 +60,7 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                   <span class="timeline-date">2026.6</span>
-                  <h3 class="timeline-title">毕业于深圳某高中</h3>
+                  <h3 class="timeline-title">毕业于深圳市第二高级中学</h3>
                   <p class="timeline-desc">在深圳完成高中学业，顺利毕业。</p>
                 </div>
               </div>
@@ -100,36 +96,12 @@
       </div>
     </section>
 
-    <!-- 第 3 页：项目展示与联系方式 -->
-    <section class="page" id="page-3">
-      <div class="page-overlay">
-        <h2 class="section-heading">更多信息</h2>
-        <div class="project-grid">
-          <a href="project1.html" class="card card-link">
-            <h3 class="card-title">个人简介</h3>
-            <p class="card-desc">想进一步了解INFINITY？</p>
-          </a>
-          <a href="project2.html" class="card card-link">
-            <h3 class="card-title">资料展示</h3>
-            <div class="card-tags">
-              <span class="tag">AI能力认证</span>
-              <span class="tag">商业能力</span>
-              <span class="tag">法律专业能力</span>
-            </div>
-          </a>
-          <a href="project3.html" class="card card-link">
-            <h3 class="card-title">简历生成</h3>
-            <p class="card-desc">获取可供直接下载打印的简历</p>
-          </a>
-        </div>
-        <div class="contact-section">
-          <h2 class="section-heading">联系方式</h2>
-          <p class="contact-info">
-            <a href="mailto:yourname@email.com">yourname@email.com</a>
-            <span class="contact-sep">/</span>
-            <a href="https://github.com/yourname" target="_blank">github.com/yourname</a>
-          </p>
-        </div>
+    <!-- 第 4 页：导航入口 -->
+    <section class="page page-4" id="page-4">
+      <canvas class="fx-canvas wave-canvas" id="wave-canvas-4"></canvas>
+      <div class="page-links">
+        <a class="menu-link" href="intro.html">个人简介</a>
+        <a class="menu-link" href="showcase.html">项目履历</a>
       </div>
     </section>
 

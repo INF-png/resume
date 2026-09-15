@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资料展示 · 杨远桐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html, body {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .showcase-page {
+      position: relative;
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      padding: var(--page-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+    .orbit-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .showcase-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .showcase-content .back-link {
+      align-self: flex-start;
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--color-link);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: opacity 0.2s;
+    }
+    .showcase-content .back-link:hover {
+      opacity: 0.7;
+    }
+    .showcase-content .back-arrow {
+      margin-right: 6px;
+    }
+
+    .zone {
+      width: 100%;
+    }
+
+    /* 分区一：AI 证书堆叠互动 + 右侧配文 */
+    .zone-1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+    }
+    .cert-wrap {
+      flex: 0 0 auto;
+      width: 340px;
+    }
+    .cert-stack {
+      display: grid;
+      grid-template-areas: "stack";
+      width: 100%;
+      cursor: pointer;
+    }
+    .cert-stack > * {
+      grid-area: stack;
+    }
+    .cert-stack .cert-item {
+      width: 100%;
+      height: auto;
+      border: 2px solid var(--card-border);
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(62, 39, 35, 0.1);
+      object-fit: contain;
+      transition: all 0.5s ease;
+      will-change: transform;
+    }
+    .cert-stack .cert-1 {
+      z-index: 3;
+      transform: rotate(-2deg);
+    }
+    .cert-stack .cert-2 {
+      z-index: 2;
+      transform: rotate(3deg) translateY(12%);
+    }
+    .cert-stack .cert-3 {
+      z-index: 1;
+      transform: rotate(-1deg) translateY(24%);
+    }
+    .cert-stack.expanded {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .cert-stack.expanded > * {
+      grid-area: auto;
+    }
+    .cert-stack.expanded .cert-item {
+      transform: rotate(0deg) translateY(0);
+    }
+    .cert-hint {
+      display: block;
+      text-align: center;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--color-sub);
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .zone-text {
+      flex: 0 0 auto;
+      max-width: 260px;
+    }
+    .zone-title {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--color-heading);
+      margin-bottom: 16px;
+    }
+    .zone-sub {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      color: var(--color-sub);
+      line-height: 1.8;
+    }
+
+    /* 分区二：文字在左，IELTS 分数在右 */
+    .zone-2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+      margin-top: 80px;
+    }
+    .zone-score {
+      max-width: none;
+    }
+    .zone-score .zone-title {
+      white-space: nowrap;
+    }
+
+    /* 分区三：左侧上下两堆叠 + 右侧配文 */
+    .zone-3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 64px;
+      margin-top: 80px;
+    }
+    .zone-3-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .zone-1,
+      .zone-2,
+      .zone-3 {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .cert-wrap {
+        width: 100%;
+        max-width: 340px;
+      }
+      .zone-text {
+        max-width: none;
+        text-align: center;
+      }
+      .zone-3-left {
+        gap: 48px;
+      }
+      .zone-score .zone-title {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="showcase-page">
+    <canvas class="orbit-canvas" id="orbit-canvas"></canvas>
+
+    <div class="showcase-content">
+      <a href="index.html" class="back-link"><span class="back-arrow">←</span>返回</a>
+
+      <!-- 分区一：AI 证书堆叠 + 配文 -->
+      <div class="zone zone-1">
+        <div class="cert-wrap">
+          <div class="cert-stack" id="certStack">
+            <img class="cert-item cert-1" src="assets/cert-ai-junior.jpg" alt="人工智能训练师（初级）证书">
+            <img class="cert-item cert-2" src="assets/cert-ai-senior.jpg" alt="人工智能训练师（高级）证书">
+            <img class="cert-item cert-3" src="assets/ITCILO.png" alt="ITCILO 证书">
+          </div>
+          <span class="cert-hint" id="certHint">点击展开查看</span>
+        </div>
+        <div class="zone-text">
+          <div class="zone-title">赶浪潮</div>
+          <div class="zone-sub">AI的时代浪潮已至，迎潮而上</div>
+        </div>
+      </div>
+
+      <!-- 分区二：国际化视野 + IELTS -->
+      <div class="zone zone-2">
+        <div class="zone-text">
+          <div class="zone-title">国际化视野</div>
+          <div class="zone-sub">第二语言的不断精进</div>
+        </div>
+        <div class="zone-text zone-score">
+          <div class="zone-title">IELTS雅思分数7.5</div>
+        </div>
+      </div>
+
+      <!-- 分区三：学术/商赛成果堆叠 + 配文 -->
+      <div class="zone zone-3">
+        <div class="zone-3-left">
+          <div class="cert-wrap">
+            <div class="cert-stack" id="certStack2">
+              <img class="cert-item cert-1" src="assets/Acceptance1.jpg" alt="论文接收函">
+              <img class="cert-item cert-2" src="assets/paper-slice-1.jpg" alt="论文切片一">
+              <img class="cert-item cert-3" src="assets/paper-slice-2.png" alt="论文切片二">
+            </div>
+            <span class="cert-hint">点击展开查看</span>
+          </div>
+          <div class="cert-wrap">
+            <div class="cert-stack" id="certStack3">
+              <img class="cert-item cert-1" src="assets/biz-cert.jpg" alt="商赛证书">
+              <img class="cert-item cert-2" src="assets/biz-signup.jpg" alt="商赛报名">
+            </div>
+            <span class="cert-hint">点击展开查看</span>
+          </div>
+        </div>
+        <div class="zone-text">
+          <div class="zone-title">跨领域视界</div>
+          <div class="zone-sub">多领域的能力实践和拓展</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ===== 证书堆叠展开/收起（支持多个堆叠） =====
+      var stacks = document.querySelectorAll('.cert-stack');
+      stacks.forEach(function (stack) {
+        var wrap = stack.closest('.cert-wrap');
+        var hint = wrap ? wrap.querySelector('.cert-hint') : null;
+        stack.addEventListener('click', function () {
+          var expanded = stack.classList.toggle('expanded');
+          if (hint) hint.textContent = expanded ? '点击收起' : '点击展开查看';
+        });
+      });
+
+      // ===== 右上角 + 左下角同心圆轨道粒子 =====
+      var canvas = document.getElementById('orbit-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var time = 0;
+      var systems = [];
+      var radii = [];
+
+      function resize() {
+        var dpr = window.devicePixelRatio || 1;
+        var rect = canvas.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+        canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function particleColor() {
+        var raw = getComputedStyle(document.documentElement)
+          .getPropertyValue('--color-particle')
+          .trim();
+        return raw.length ? raw : '184, 169, 155';
+      }
+
+      function createParticles() {
+        particles = [];
+        var w = canvas.clientWidth;
+        var h = canvas.clientHeight;
+        var m = Math.min(w, h);
+        var rgb = particleColor();
+
+        // 两个轨道系统：右上角 (w, 0)，左下角 (0, h)
+        systems = [
+          { cx: w, cy: 0 },
+          { cx: 0, cy: h }
+        ];
+        // 同心圆轨道半径（占短边的比例），内层到外层
+        radii = [0.12, 0.22, 0.32, 0.42];
+        // 每轨道粒子数：外层更多（已增多）
+        var counts = [16, 20, 24, 28];
+
+        systems.forEach(function (sys) {
+          radii.forEach(function (rf, ri) {
+            var r = rf * m;
+            var n = counts[ri];
+            for (var i = 0; i < n; i++) {
+              particles.push({
+                cx: sys.cx,
+                cy: sys.cy,
+                r: r,
+                angle: (i / n) * Math.PI * 2 + Math.random() * 0.5,
+                speed: 0.5 - ri * 0.08, // 内层转得快，外层转得慢
+                size: 2 + Math.random() * 2.6,
+                alpha: 0.35 + Math.random() * 0.4,
+                rgb: rgb
+              });
+            }
+          });
+        });
+      }
+
+      function draw() {
+        var w = canvas.clientWidth;
+        var h = canvas.clientHeight;
+        ctx.clearRect(0, 0, w, h);
+        time += 0.016;
+        var rgb = particleColor();
+
+        // 先绘制轨道同心圆（加粗）
+        ctx.strokeStyle = 'rgba(' + rgb + ', 0.28)';
+        ctx.lineWidth = 2.5;
+        var m = Math.min(w, h);
+        systems.forEach(function (sys) {
+          radii.forEach(function (rf) {
+            ctx.beginPath();
+            ctx.arc(sys.cx, sys.cy, rf * m, 0, Math.PI * 2);
+            ctx.stroke();
+          });
+        });
+
+        // 再绘制轨道上环绕的粒子
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.angle += p.speed * 0.016;
+          var x = p.cx + Math.cos(p.angle) * p.r;
+          var y = p.cy + Math.sin(p.angle) * p.r;
+          ctx.beginPath();
+          ctx.arc(x, y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + p.rgb + ', ' + p.alpha + ')';
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      createParticles();
+      requestAnimationFrame(draw);
+
+      var resizeTimer = null;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          resize();
+          createParticles();
+        }, 200);
+      });
+    })();
+  </script>
+</body>
+</html>

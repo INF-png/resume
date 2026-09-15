@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人简介 · 杨远桐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    html, body {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .intro-page {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      padding: var(--page-padding);
+      padding-bottom: 20vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .intro-page .back-link {
+      align-self: flex-start;
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      color: var(--color-link);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: opacity 0.2s;
+    }
+    .intro-page .back-link:hover {
+      opacity: 0.7;
+    }
+    .intro-page .back-arrow {
+      margin-right: 6px;
+    }
+    .intro-hero {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .intro-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--card-border);
+      display: block;
+    }
+    .intro-body {
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+    }
+    .intro-line {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--color-heading);
+      margin-bottom: 14px;
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(12px);
+      transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease;
+    }
+    .intro-line.visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+    .intro-line.intro-gap {
+      height: 8px;
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .intro-avatar { width: 96px; height: 96px; }
+      .intro-line { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-page">
+    <a href="index.html" class="back-link"><span class="back-arrow">←</span>返回</a>
+    <div class="intro-hero">
+      <img class="intro-avatar" src="assets/avatar.jpg" alt="头像">
+    </div>
+    <div class="intro-body">
+      <p class="intro-line">杨远桐 来自深圳</p>
+      <p class="intro-line intro-gap"></p>
+      <p class="intro-line">起潮涌，赴山海</p>
+      <p class="intro-line">希望深圳的新生活力能与汕头这片土地积淀的深厚文化交融碰撞出独特的火花</p>
+      <p class="intro-line">自幼成长于浓厚的法律氛围中，目前已经在有一定规模的广东卓建律师事务所、广东锦天成律师事务所等本地的律所参观及实习（非正式实习），</p>
+      <p class="intro-line">以实习生的身份跟进观摩各所不同领域的律师实务、包括旁听正式庭审、整理相关案卷</p>
+      <p class="intro-line">无论是参与的法律领域的实习，抑或是参加法博会和各所组织的大型辩论赛和新法的讨论交流学习会议等,</p>
+      <p class="intro-line">这些所有的宝贵经历都是我热爱法学的理由，</p>
+      <p class="intro-line">也奠定了我向法律领域迈出下一步的勇气。</p>
+      <p class="intro-line intro-gap"></p>
+      <p class="intro-line">随潮涌起，以热爱奔赴山海，</p>
+      <p class="intro-line">我由衷希望能够秉承汕大的精神内涵，</p>
+      <p class="intro-line">在成为一个法律人的道路上坚定地前行。</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lines = document.querySelectorAll('.intro-line');
+      if (lines.length > 0) {
+        setTimeout(function () {
+          lines.forEach(function (line, i) {
+            setTimeout(function () {
+              line.classList.add('visible');
+            }, i * 350);
+          });
+        }, 300);
+      }
+    })();
+  </script>
+</body>
+</html>
